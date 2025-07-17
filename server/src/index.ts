@@ -30,6 +30,12 @@ app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
+app.delete("/decks/:deckId", async(req: Request, res: Response)=>{
+  const deckId = req.params.deckId;
+  const deck = await Deck.findByIdAndDelete(deckId);
+  res.json(deck)
+})
+
 const port = process.env.PORT || 5000;
 
 app.use((req, res) => {
