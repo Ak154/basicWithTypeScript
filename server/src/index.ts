@@ -4,37 +4,25 @@ dotenv.config();
 import cors from "cors";
 import "./config/dbConfig";
 import Deck from "./models/Deck";
+import { getDeckController } from "./controllers/getDeckController";
+import { createDeckController } from "./controllers/createDeckController";
+import { deleteDeckController } from "./controllers/deleteDeckController";
+import { createCardDeckController } from "./controllers/createCardDeckController";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/decks", async (req: Request, res: Response) => {
-  const deck = await Deck.find({});
+app.get("/decks", getDeckController);
+app.post("/decks", createDeckController);
+app.delete("/decks/:deckId", deleteDeckController)
+app.post("/decks/:deckId/cards", createCardDeckController)
 
-  res
-    .status(200)
-    .json({ message: "Data fetched successfully", success: false, data: deck });
-});
-
-app.post("/decks", async (req: Request, res: Response) => {
-  const newDeck = new Deck({
-    title: req.body.title,
-  });
-  const createDeck = await newDeck.save();
-  res.json(createDeck);
-});
 
 app.get("/", (req, res) => {
   res.send("Hello world");
 });
-
-app.delete("/decks/:deckId", async(req: Request, res: Response)=>{
-  const deckId = req.params.deckId;
-  const deck = await Deck.findByIdAndDelete(deckId);
-  res.json(deck)
-})
 
 const port = process.env.PORT || 5000;
 
