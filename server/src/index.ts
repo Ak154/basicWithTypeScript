@@ -19,7 +19,7 @@ app.use(express.json());
 app.get("/decks", getDeckController);
 app.post("/decks", createDeckController);
 app.delete("/decks/:deckId", deleteDeckController);
-app.post("/decks/:deckId", getDecksController);
+app.get("/decks/:deckId", getDecksController);
 app.post("/decks/:deckId/cards", createCardDeckController);
 app.delete("/decks/:deckId/cards/:index", deleteCardOnDeckController);
 
