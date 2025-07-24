@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import { Link, useParams } from "react-router-dom";
-import { deleteDeck } from "./api/deleteDeck";
-import { createDeck } from "./api/createDeck";
+import "./Deck.css";
 import { getDecks, type TDeck } from "./api/getDecks";
 import { createCard } from "./api/createCard";
 import { deleteCard } from "./api/deleteCard";
+import { useParams } from "react-router-dom";
 
 const Deck = () => {
 
@@ -24,8 +22,8 @@ const Deck = () => {
 
   const handleDeleteCard = async (index:number) => {
     if(!deckId) return;
-    await deleteCard(deckId, index)
-    setCards([...cards].splice(index, 1))
+    const newDeck = await deleteCard(deckId, index)
+    setCards(newDeck.cards)
   };
 
   useEffect(() => {
@@ -38,11 +36,11 @@ const Deck = () => {
   }, [deckId]);
 
   return (
-    <div className="App">
-      <ul className="decks">
+    <div className="Deck">
+      <ul className="cards">
         {cards?.map((card, index) => (
           <li key={index}>
-            <button onClick={()=> handleDeleteCard(index)}>X</button>
+            <button onClick={()=> handleDeleteCard(index)} style={{ color: "white" }}>X</button>
             {card}
           </li>
         ))}
@@ -56,7 +54,7 @@ const Deck = () => {
             setText(e.target.value);
           }}
         />
-        <button type="submit">create card</button>
+        <button type="submit" style={{ backgroundColor: "#fff", boxShadow: "rgba(3, 102, 214, 0.3) 0px 0px 0px 3px" }}>create card</button>
       </form>
     </div>
   );

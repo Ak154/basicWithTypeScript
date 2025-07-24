@@ -1,0 +1,15 @@
+.Header {
+    height: 80px;
+    background-color: aliceblue;
+    color: #000;
+    box-sizing: border-box;
+}
+
+.Header .container {
+    width: 800px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    align-items: center;
+}
