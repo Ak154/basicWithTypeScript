@@ -35,8 +35,11 @@ const Deck = () => {
     })();
   }, [deckId]);
 
+  console.log(deck.title)
+
   return (
     <div className="Deck">
+      {/* <h1>{deck?.title}</h1> */}
       <ul className="cards">
         {cards?.map((card, index) => (
           <li key={index}>

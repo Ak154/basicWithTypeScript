@@ -11,6 +11,10 @@
   gap: 28px;
 }
 
+.App h1 {
+  font-size: 32px;
+  text-align: center;
+}
 .App form {
   display: flex;
   gap: 18px;
